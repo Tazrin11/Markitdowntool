@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+.container {
+    max-width: 600px;
+    margin: 100px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+}
