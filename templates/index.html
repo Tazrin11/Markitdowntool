@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF to Markdown</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>PDF → Markdown Converter</h1>
+
+    <form id="uploadForm">
+        <input type="file" id="pdfFile" accept=".pdf" required>
+        <button type="submit">Convert</button>
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+document.getElementById("uploadForm")
+.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const fileInput =
+        document.getElementById("pdfFile");
+
+    const formData = new FormData();
+
+    formData.append(
+        "file",
+        fileInput.files[0]
+    );
+
+    const response = await fetch(
+        "/convert",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    const data = await response.json();
+
+    const result =
+        document.getElementById("result");
+
+    if(data.success){
+        result.innerHTML =
+        `<a href="${data.download_url}">
+            Download Markdown
+        </a>`;
+    } else {
+        result.innerHTML =
+        `<p>${data.error}</p>`;
+    }
+});
+</script>
+
+</body>
+</html>
